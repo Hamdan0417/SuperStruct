@@ -1098,7 +1098,14 @@
                 }
             } catch (error) {
                 console.error("Authentication failed:", error);
-                updateStatus('Authentication Failed', false);
+                // Provide a more helpful error message for the user.
+                // This error often happens when Anonymous Sign-In is not enabled in the Firebase project settings.
+                let userMessage = 'Authentication Failed';
+                if (error.code === 'auth/operation-not-allowed') {
+                    userMessage = 'خطأ: الرجاء تفعيل تسجيل الدخول المجهول في إعدادات Firebase.';
+                    console.error("GUIDE: Please go to your Firebase Console -> Authentication -> Sign-in method -> and enable the 'Anonymous' provider.");
+                }
+                updateStatus(userMessage, false);
             }
         }
         
