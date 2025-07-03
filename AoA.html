@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عقد تأسيس شركة ذات مسؤولية محدودة | Articles of Association of a Limited Liability Company</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d47a1;
+            --secondary-color: #1565c0;
+            --accent-color: #e3f2fd;
+            --text-color: #333;
+            --border-color: #ddd;
+            --header-bg: #f5f5f5;
+            --notes-bg: #fffbe6;
+            --notes-border: #ffe58f;
+            --notes-text: #664d03;
+            --status-connected-bg: #d1e7dd;
+            --status-connected-text: #0f5132;
+            --status-saving-bg: #fff3cd;
+            --status-saving-text: #664d03;
+            --status-error-bg: #f8d7da;
+            --status-error-text: #842029;
+        }
+
+        body {
+            font-family: 'Tajawal', 'Roboto', sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border-top: 5px solid var(--primary-color);
+        }
+        
+        #status-indicator {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            z-index: 1000;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            direction: ltr;
+        }
+        
+        .status-connected {
+            background-color: var(--status-connected-bg);
+            color: var(--status-connected-text);
+        }
+        
+        .status-saving {
+            background-color: var(--status-saving-bg);
+            color: var(--status-saving-text);
+        }
+        
+        .status-error {
+            background-color: var(--status-error-bg);
+            color: var(--status-error-text);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            font-size: 1.8em;
+            color: var(--secondary-color);
+            margin: 5px 0 0;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .bilingual-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .bilingual-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .arabic-col, .english-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .english-col {
+            direction: ltr;
+        }
+
+        .article-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .preamble {
+            background-color: var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 4px solid var(--secondary-color);
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .english-col .preamble {
+             border-left: 4px solid var(--secondary-color);
+             border-right: none;
+        }
+
+        ul, ol {
+            padding-right: 20px;
+        }
+        
+        .english-col ul, .english-col ol {
+            padding-left: 20px;
+            padding-right: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--header-bg);
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .signatures-section {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .signatures-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        
+        .signature-block {
+            margin-top: 20px;
+        }
+
+        .signature-block p {
+            margin: 5px 0;
+        }
+        
+        .signature-line {
+            margin-top: 40px;
+            border-bottom: 1px solid #999;
+        }
+
+        .partner-card {
+            background-color: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .partner-card h4 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            font-size: 1.2em;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+            font-size: 0.9em;
+            color: #777;
+        }
+        
+        .notes-section {
+            grid-column: 1 / -1;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: var(--notes-bg);
+            border: 1px solid var(--notes-border);
+            border-radius: 8px;
+        }
+        .notes-section h5 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--notes-text);
+            border-bottom: 1px solid var(--notes-border);
+            padding-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .note-item {
+            margin-bottom: 15px;
+        }
+        .note-item label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: var(--notes-text);
+        }
+        .note-item textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            min-height: 70px;
+            font-family: 'Tajawal', 'Roboto', sans-serif;
+            font-size: 1em;
+            background-color: #fff;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .note-item textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 5px rgba(21, 101, 192, 0.3);
+        }
+
+        @media (max-width: 992px) {
+            .bilingual-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+             .container {
+                padding: 20px;
+            }
+            #status-indicator {
+                top: 10px;
+                left: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="status-indicator">Connecting...</div>
+
+    <div class="container">
+
+        <header class="header">
+            <h1>عقد تأسيس شركة ذات مسؤولية محدودة</h1>
+            <h2>Articles of Association of a Limited Liability Company</h2>
+        </header>
+
+        <section class="intro-section">
+            <div class="bilingual-section">
+                <div class="arabic-col">
+                    <p><strong>بسم الله الرحمن الرحيم</strong></p>
+                    <p>إنه في يوم ...... بتاريخ ..../..../١٤٤٧هـ الموافق ..../..../٢٠٢٥م بمدينة الرياض، المملكة العربية السعودية.</p>
+                    <p>تم الاتفاق والتراضي بين الأطراف المذكورين أدناه على تأسيس شركة ذات مسؤولية محدودة ("الشركة") وفقاً لأحكام نظام الشركات السعودي ولائحته التنفيذية، وبموجب الشروط والبنود التالية:</p>
+                </div>
+                <div class="english-col">
+                    <p><strong>In the name of Allah, the Most Gracious, the Most Merciful</strong></p>
+                    <p>On this day, ...... corresponding to ..../..../1447 H, equivalent to ..../..../2025 G, in the city of Riyadh, Kingdom of Saudi Arabia.</p>
+                    <p>It has been agreed and consented between the parties mentioned below to establish a Limited Liability Company ("the Company") in accordance with the provisions of the Saudi Companies Law and its implementing regulations, and pursuant to the following terms and conditions:</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3 class="section-title">الأطراف (الشركاء) / The Parties (The Partners)</h3>
+            <div class="bilingual-section">
+                 <div class="arabic-col">
+                     <div class="partner-card">
+                        <h4>الطرف الأول:</h4>
+                        <p><strong>الاسم:</strong> خالد حمود الذياب<br>
+                        <strong>الجنسية:</strong> سعودي<br>
+                        <strong>رقم الهوية الوطنية:</strong> [...........................]<br>
+                        <strong>العنوان الوطني:</strong> [...........................]<br>
+                        <em>ويمثل في هذا العقد (الطرف الأول)</em></p>
+                     </div>
+                     <div class="partner-card">
+                        <h4>الطرف الثاني:</h4>
+                        <p><strong>الاسم:</strong> نصرت محمد ديلاور محمد<br>
+                        <strong>الجنسية:</strong> هندي<br>
+                        <strong>رقم الإقامة:</strong> [...........................]<br>
+                        <strong>العنوان الوطني:</strong> [...........................]<br>
+                        <em>ويمثل في هذا العقد (الطرف الثاني)</em></p>
+                     </div>
+                     <div class="partner-card">
+                        <h4>الطرف الثالث:</h4>
+                        <p><strong>الاسم:</strong> فوزي حمود الذياب<br>
+                        <strong>الجنسية:</strong> سعودي<br>
+                        <strong>رقم الهوية الوطنية:</strong> [...........................]<br>
+                        <strong>العنوان الوطني:</strong> [...........................]<br>
+                        <em>ويمثل في هذا العقد (الطرف الثالث)</em></p>
+                     </div>
+                </div>
+                <div class="english-col">
+                    <div class="partner-card">
+                        <h4>First Party:</h4>
+                        <p><strong>Name:</strong> Khalid Hamoud Al-Theyab<br>
+                        <strong>Nationality:</strong> Saudi<br>
+                        <strong>National ID No.:</strong> [...........................]<br>
+                        <strong>National Address:</strong> [...........................]<br>
+                        <em>Represented in this contract as (the First Party)</em></p>
+                    </div>
+                     <div class="partner-card">
+                        <h4>Second Party:</h4>
+                        <p><strong>Name:</strong> Nusrat Mohammed Dilawar Mohammed<br>
+                        <strong>Nationality:</strong> Indian<br>
+                        <strong>Iqama (Residency) No.:</strong> [...........................]<br>
+                        <strong>National Address:</strong> [...........................]<br>
+                        <em>Represented in this contract as (the Second Party)</em></p>
+                     </div>
+                     <div class="partner-card">
+                        <h4>Third Party:</h4>
+                        <p><strong>Name:</strong> Fawzi Hamoud Al-Theyab<br>
+                        <strong>Nationality:</strong> Saudi<br>
+                        <strong>National ID No.:</strong> [...........................]<br>
+                        <strong>National Address:</strong> [...........................]<br>
+                        <em>Represented in this contract as (the Third Party)</em></p>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+             <h3 class="section-title">تمهيد / Preamble</h3>
+             <div class="bilingual-section">
+                 <div class="arabic-col">
+                     <div class="preamble">
+                        <p>حيث إن الأطراف الموقعين على هذا العقد لديهم الرغبة والخبرة في مجال المقاولات وتطوير الأعمال، فقد اتفقوا على تأسيس شركة ذات مسؤولية محدودة فيما بينهم لتنفيذ الأغراض الموضحة في هذا العقد.</p>
+                     </div>
+                 </div>
+                 <div class="english-col">
+                     <div class="preamble">
+                        <p>Whereas the parties signatory to this contract have the desire and experience in the field of contracting and business development, they have agreed to establish a limited liability company among themselves to carry out the objects set forth in this contract.</p>
+                     </div>
+                 </div>
+             </div>
+        </section>
+        
+        <h3 class="section-title">بنود العقد / Articles of the Contract</h3>
+        
+        <!-- Article 1 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الأول: اسم الشركة</h4>
+                <p>اسم الشركة هو: <strong>شركة [اسم مقترح]</strong>. وهي شركة ذات مسؤولية محدودة (ذ.م.م).</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 1: Company Name</h4>
+                <p>The name of the company is: <strong>[Proposed Name] Company</strong>. It is a Limited Liability Company (L.L.C.).</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-1-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-1-khalid" data-article="1" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-1-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-1-nusrat" data-article="1" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-1-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-1-fawzi" data-article="1" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثاني: أغراض الشركة</h4>
+                <ul>
+                    <li>أعمال المقاولات العامة والإنشاءات، وتشمل على سبيل المثال لا الحصر (أعمال الحفر والردم والأساسات، إنشاء المباني وهدمها وترميمها وإصلاحها).</li>
+                    <li>أعمال الطرق والجسور والبنية التحتية.</li>
+                    <li>الأعمال الكهربائية والميكانيكية والصحية.</li>
+                    <li>إدارة المشاريع والإشراف على التنفيذ.</li>
+                    <li>استيراد وتصدير وتجارة الجملة والتجزئة في مواد البناء والمعدات اللازمة لأغراض الشركة.</li>
+                    <li>أي أنشطة أخرى مكملة أو مرتبطة بما ورد أعلاه بعد الحصول على التراخيص اللازمة.</li>
+                </ul>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 2: Company Objects</h4>
+                <ul>
+                    <li>General contracting and construction works, including but not limited to (excavation, backfilling, foundation works, construction, demolition, renovation, and repair of buildings).</li>
+                    <li>Roads, bridges, and infrastructure works.</li>
+                    <li>Electrical, mechanical, and sanitary works.</li>
+                    <li>Project management and supervision of execution.</li>
+                    <li>Importing, exporting, wholesale, and retail trade in building materials and equipment necessary for the Company's objects.</li>
+                    <li>Any other activities complementary or related to the above, after obtaining the necessary licenses.</li>
+                </ul>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-2-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-2-khalid" data-article="2" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-2-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-2-nusrat" data-article="2" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-2-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-2-fawzi" data-article="2" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+        
+        <!-- Article 3 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثالث: المركز الرئيسي للشركة</h4>
+                <p>يكون المركز الرئيسي للشركة في مدينة الرياض بالمملكة العربية السعودية. ويجوز لمدير الشركة، بعد موافقة الشركاء، فتح فروع أو مكاتب لها داخل أو خارج المملكة.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 3: Head Office</h4>
+                <p>The head office of the Company shall be in the city of Riyadh, Kingdom of Saudi Arabia. The Company's manager may, with the partners' approval, open branches or offices for it inside or outside the Kingdom.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-3-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-3-khalid" data-article="3" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-3-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-3-nusrat" data-article="3" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-3-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-3-fawzi" data-article="3" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+        
+        <!-- Article 4 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                 <h4 class="article-title">البند الرابع: مدة الشركة</h4>
+                <p>مدة الشركة تسعة وتسعون (99) عاماً، تبدأ من تاريخ قيدها في السجل التجاري، وتُجدد تلقائياً لمدد مماثلة ما لم يخطر أحد الشركاء الآخرين برغبته في عدم التجديد قبل انتهاء المدة الأصلية أو المجددة بسنة واحدة على الأقل.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 4: Company Duration</h4>
+                <p>The duration of the Company is ninety-nine (99) years, commencing from the date of its registration in the Commercial Register, and shall be automatically renewed for similar periods unless one of the partners notifies the others of his desire not to renew at least one year before the end of the original or renewed term.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-4-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-4-khalid" data-article="4" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-4-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-4-nusrat" data-article="4" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-4-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-4-fawzi" data-article="4" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+        
+        <!-- Article 5 -->
+        <div class="bilingual-section">
+             <div class="arabic-col">
+                 <h4 class="article-title">البند الخامس: رأس المال وحصص الشركاء</h4>
+                <p>حُدّد رأس مال الشركة بمبلغ <strong>500,000 ريال سعودي (خمسمائة ألف ريال سعودي)</strong>، مقسم إلى 5,000 (خمسة آلاف) حصة نقدية، قيمة كل حصة 100 (مائة ريال سعودي)، موزعة بين الشركاء على النحو التالي:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الشريك</th>
+                            <th>عدد الحصص</th>
+                            <th>قيمة الحصص (بالريال)</th>
+                            <th>نسبة الملكية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>خالد حمود الذياب</td>
+                            <td>1,250</td>
+                            <td>125,000</td>
+                            <td>25%</td>
+                        </tr>
+                        <tr>
+                            <td>نصرت محمد ديلاور محمد</td>
+                            <td>2,500</td>
+                            <td>250,000</td>
+                            <td>50%</td>
+                        </tr>
+                        <tr>
+                            <td>فوزي حمود الذياب</td>
+                            <td>1,250</td>
+                            <td>125,000</td>
+                            <td>25%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>المجموع</strong></td>
+                            <td><strong>5,000</strong></td>
+                            <td><strong>500,000</strong></td>
+                            <td><strong>100%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>يُقر الشركاء بأنه قد تم إيداع كامل رأس المال النقدي لدى أحد البنوك المعتمدة في المملكة العربية السعودية باسم الشركة تحت التأسيس.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 5: Capital and Partners' Shares</h4>
+                <p>The capital of the Company is set at <strong>SAR 500,000 (Five Hundred Thousand Saudi Riyals)</strong>, divided into 5,000 (five thousand) cash shares, with a par value of SAR 100 (one hundred Saudi Riyals) each, distributed among the partners as follows:</p>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Partner</th>
+                            <th>Number of Shares</th>
+                            <th>Value of Shares (SAR)</th>
+                            <th>Ownership Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Khalid Hamoud Al-Theyab</td>
+                            <td>1,250</td>
+                            <td>125,000</td>
+                            <td>25%</td>
+                        </tr>
+                        <tr>
+                            <td>Nusrat Mohammed Dilawar Mohammed</td>
+                            <td>2,500</td>
+                            <td>250,000</td>
+                            <td>50%</td>
+                        </tr>
+                        <tr>
+                            <td>Fawzi Hamoud Al-Theyab</td>
+                            <td>1,250</td>
+                            <td>125,000</td>
+                            <td>25%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>5,000</strong></td>
+                            <td><strong>500,000</strong></td>
+                            <td><strong>100%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>The partners acknowledge that the entire cash capital has been deposited with an approved bank in the Kingdom of Saudi Arabia in the name of the company under formation.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-5-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-5-khalid" data-article="5" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-5-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-5-nusrat" data-article="5" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-5-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-5-fawzi" data-article="5" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+        
+        <!-- Article 6 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                 <h4 class="article-title">البند السادس: إدارة الشركة</h4>
+                <p>يتولى إدارة الشركة مجلس مديرين مكون من جميع الشركاء.</p>
+                <ul>
+                    <li>يُعين السيد/ خالد حمود الذياب (الطرف الأول) رئيساً لمجلس المديرين.</li>
+                    <li>يُعين السيد/ فوزي حمود الذياب (الطرف الثالث) نائباً لرئيس مجلس المديرين.</li>
+                    <li>يُعين السيد/ نصرت محمد ديلاور محمد (الطرف الثاني) عضواً بمجلس الإدارة ومديراً تنفيذياً (CEO) للشركة، ويكون له بصفته مديراً تنفيذياً أوسع الصلاحيات في إدارة الشؤون اليومية للشركة وتمثيلها أمام الغير والقضاء والجهات الحكومية والخاصة، مع مراعاة القيود الواردة في هذا العقد.</li>
+                </ul>
+                <p><strong>القرارات التي تتطلب موافقة جميع الشركاء:</strong></p>
+                <ol>
+                    <li>الحصول على أي قرض أو تسهيل ائتماني أو ترتيب أي شكل من أشكال المديونية باسم الشركة، مهما كانت قيمتها.</li>
+                    <li>بيع أي من أصول الشركة التي تتجاوز قيمتها مبلغاً يحدد لاحقاً بموافقة الشركاء.</li>
+                    <li>تعديل عقد تأسيس الشركة.</li>
+                    <li>حل الشركة أو دمجها.</li>
+                </ol>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 6: Company Management</h4>
+                <p>The Company shall be managed by a Board of Managers composed of all the partners.</p>
+                <ul>
+                    <li>Mr. Khalid Hamoud Al-Theyab (the First Party) is appointed as the Chairman of the Board of Managers.</li>
+                    <li>Mr. Fawzi Hamoud Al-Theyab (the Third Party) is appointed as the Vice-Chairman of the Board of Managers.</li>
+                    <li>Mr. Nusrat Mohammed Dilawar Mohammed (the Second Party) is appointed as a member of the Board of Managers and the Chief Executive Officer (CEO) of the Company. In his capacity as CEO, he shall have the broadest powers to manage the daily affairs of the Company and to represent it before third parties, the judiciary, and governmental and private entities, subject to the restrictions contained in this contract.</li>
+                </ul>
+                <p><strong>Decisions Requiring Unanimous Partner Approval:</strong></p>
+                 <ol>
+                    <li>Obtaining any loan, credit facility, or arranging any form of debt in the Company's name, regardless of its value.</li>
+                    <li>Selling any of the Company's assets whose value exceeds an amount to be determined later by the partners' approval.</li>
+                    <li>Amending the Company's Articles of Association.</li>
+                    <li>Dissolving or merging the Company.</li>
+                </ol>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-6-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-6-khalid" data-article="6" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-6-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-6-nusrat" data-article="6" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-6-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-6-fawzi" data-article="6" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+        
+        <!-- Article 7 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند السابع: التزامات الشركاء</h4>
+                <p><strong>التزامات الطرف الأول والثالث (السيد/ خالد والسيد/ فوزي الذياب):</strong></p>
+                <ul>
+                    <li><strong>الدعم المالي:</strong> الالتزام بتوفير الدعم المالي الكامل والتمويل اللازم لتغطية تكاليف المشاريع وضمان استمرارية أعمال الشركة.</li>
+                    <li><strong>تطوير الأعمال:</strong> العمل على استقطاب فرص وعقود جديدة للشركة.</li>
+                    <li><strong>العلاقات والعقود:</strong> استثمار شبكة العلاقات لتوسيع قاعدة عملاء الشركة وتعزيز مكانتها في السوق.</li>
+                    <li><strong>إدارة المخاطر:</strong> وضع إطار عمل لتحديد المخاطر المحتملة ومواجهتها.</li>
+                </ul>
+                <p><strong>التزامات الطرف الثاني (السيد/ نصرت محمد ديلاور محمد):</strong></p>
+                <ul>
+                    <li><strong>التنفيذ والإدارة الميدانية:</strong> الإدارة الكاملة لجميع جوانب تنفيذ المشاريع.</li>
+                    <li><strong>الإشراف الفني:</strong> المتابعة الفنية والهندسية اليومية لضمان جودة التنفيذ ومطابقته للمواصفات.</li>
+                    <li><strong>إدارة المقاولين والموردين:</strong> اختيار وتنسيق عمل المقاولين من الباطن والتفاوض مع الموردين.</li>
+                    <li><strong>السلامة والصحة المهنية (HSE):</strong> تطبيق كافة معايير السلامة في مواقع العمل.</li>
+                </ul>
+                <p><strong>بند حق الأولوية في التنفيذ:</strong> يلتزم الطرف الأول والثالث بمنح حق الأولوية لـ "شركة البنية الفوقية للمقاولات" (المملوكة للطرف الثاني) لتنفيذ أعمال المقاولات التي تحصل عليها الشركة، بشرط أن يكون عرضها الفني والمالي منافساً للعروض الأخرى.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 7: Partners' Obligations</h4>
+                <p><strong>Obligations of the First and Third Parties (Mr. Khalid and Mr. Fawzi Al-Theyab):</strong></p>
+                <ul>
+                    <li><strong>Financial Support:</strong> Commitment to provide full financial support and the necessary funding to cover project costs and ensure the continuity of the Company's business.</li>
+                    <li><strong>Business Development:</strong> Working to attract new opportunities and contracts for the Company.</li>
+                    <li><strong>Relations and Contracts:</strong> Leveraging their network of relationships to expand the Company's client base and enhance its market position.</li>
+                    <li><strong>Risk Management:</strong> Establishing a framework to identify and address potential risks.</li>
+                </ul>
+                <p><strong>Obligations of the Second Party (Mr. Nusrat Mohammed Dilawar Mohammed):</strong></p>
+                <ul>
+                    <li><strong>Execution and Field Management:</strong> Full management of all aspects of project execution.</li>
+                    <li><strong>Technical Supervision:</strong> Daily technical and engineering follow-up to ensure the quality of execution and its compliance with specifications.</li>
+                    <li><strong>Management of Subcontractors and Suppliers:</strong> Selecting and coordinating the work of subcontractors and negotiating with suppliers.</li>
+                    <li><strong>Health, Safety, and Environment (HSE):</strong> Implementing all safety standards at work sites.</li>
+                </ul>
+                <p><strong>Right of First Priority for Execution Clause:</strong> The First and Third Parties commit to granting the right of first priority to "Al-Bunya Al-Fawqia for Contracting Company" (owned by the Second Party) to execute contracting works obtained by the Company, provided that its technical and financial offer is competitive with other offers.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-7-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-7-khalid" data-article="7" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-7-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-7-nusrat" data-article="7" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-7-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-7-fawzi" data-article="7" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 8 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثامن: جمعية الشركاء</h4>
+                <p>تنعقد جمعية الشركاء مرة واحدة على الأقل في السنة. وتكون القرارات صحيحة إذا صدرت بموافقة شركاء يمثلون أكثر من نصف رأس المال، ما لم ينص العقد على أغلبية خاصة.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 8: Partners' Assembly</h4>
+                <p>The Partners' Assembly shall convene at least once a year. Decisions shall be valid if approved by partners representing more than half of the capital, unless the contract stipulates a special majority.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-8-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-8-khalid" data-article="8" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-8-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-8-nusrat" data-article="8" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-8-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-8-fawzi" data-article="8" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 9 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند التاسع: السنة المالية والأرباح والخسائر</h4>
+                <p>تبدأ السنة المالية للشركة في الأول من يناير وتنتهي في الحادي والثلاثين من ديسمبر من كل عام، على أن تبدأ السنة المالية الأولى من تاريخ قيد الشركة بالسجل التجاري وتنتهي في 31 ديسمبر من العام التالي.</p>
+                <p>يتم توزيع الأرباح الصافية السنوية بعد خصم المصروفات العمومية وتجنيب نسبة يقررها الشركاء سنويًا على ألا تتجاوز (10%) كاحتياطي نظامي.</p>
+                <p>توزع الأرباح والخسائر بين الشركاء بنسبة حصص كل منهم في رأس المال.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 9: Fiscal Year, Profits, and Losses</h4>
+                <p>The Company's fiscal year begins on the first of January and ends on the thirty-first of December of each year. The first fiscal year shall begin from the date of the Company's registration in the Commercial Register and end on December 31 of the following year.</p>
+                <p>The annual net profits shall be distributed after deducting general expenses and setting aside a percentage, to be decided annually by the partners, not exceeding (10%) as a statutory reserve.</p>
+                <p>Profits and losses shall be distributed among the partners according to the proportion of their respective shares in the capital.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-9-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-9-khalid" data-article="9" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-9-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-9-nusrat" data-article="9" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-9-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-9-fawzi" data-article="9" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 10 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند العاشر: التنازل عن الحصص</h4>
+                <p>لا يجوز لأي شريك التنازل عن حصصه للغير (بعوض أو بغير عوض) إلا بموافقة باقي الشركاء.</p>
+                <p>في حال رغب أحد الشركاء في بيع حصصه، يكون لباقي الشركاء حق الأولوية (حق الشفعة) في شرائها بنفس شروط العرض المقدم من الغير.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 10: Assignment of Shares</h4>
+                <p>No partner may assign his shares to a third party (with or without consideration) except with the approval of the other partners.</p>
+                <p>If a partner wishes to sell his shares, the remaining partners shall have the right of first refusal (pre-emption right) to purchase them under the same terms and conditions of the offer made by the third party.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-10-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-10-khalid" data-article="10" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-10-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-10-nusrat" data-article="10" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-10-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-10-fawzi" data-article="10" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 11 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الحادي عشر: عدم المنافسة</h4>
+                <p>يلتزم جميع الشركاء بعدم ممارسة أي نشاط تجاري منافس بشكل مباشر لأغراض الشركة طوال مدة عضويتهم فيها ولمدة سنتين بعد خروجهم منها، ويُستثنى من هذا البند ملكية وإدارة الطرف الثاني (نصرت محمد ديلاور محمد) لـ "شركة البنية الفوقية للمقاولات" وأنشطتها.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 11: Non-Competition</h4>
+                <p>All partners undertake not to engage in any business activity that directly competes with the Company's objects throughout their membership in it and for a period of two years after their exit from it. The ownership and management by the Second Party (Nusrat Mohammed Dilawar Mohammed) of "Al-Bunya Al-Fawqia for Contracting Company" and its activities are excluded from this clause.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-11-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-11-khalid" data-article="11" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-11-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-11-nusrat" data-article="11" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-11-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-11-fawzi" data-article="11" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 12 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثاني عشر: حل النزاعات</h4>
+                <p>أي نزاع ينشأ بين الشركاء حول تفسير أو تطبيق هذا العقد يتم حله ودياً. فإن تعذر ذلك، يكون الاختصاص القضائي للمحكمة التجارية بمدينة الرياض.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 12: Dispute Resolution</h4>
+                <p>Any dispute arising between the partners concerning the interpretation or application of this contract shall be settled amicably. If this is not possible, the Commercial Court in Riyadh shall have jurisdiction.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-12-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-12-khalid" data-article="12" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-12-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-12-nusrat" data-article="12" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-12-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-12-fawzi" data-article="12" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 13 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثالث عشر: القانون الواجب التطبيق</h4>
+                <p>يخضع هذا العقد وتفسيره وتنفيذه لأحكام الأنظمة المعمول بها في المملكة العربية السعودية.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 13: Governing Law</h4>
+                <p>This contract, its interpretation, and its execution shall be subject to the laws and regulations in force in the Kingdom of Saudi Arabia.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-13-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-13-khalid" data-article="13" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-13-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-13-nusrat" data-article="13" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-13-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-13-fawzi" data-article="13" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 14 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الرابع عشر: أحكام ختامية</h4>
+                <p>حُرر هذا العقد من ثلاث نسخ أصلية، بيد كل طرف نسخة للعمل بموجبها، وتودع النسخة الثالثة لدى الجهات المختصة لإتمام إجراءات التسجيل.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 14: Final Provisions</h4>
+                <p>This contract has been drawn up in three original copies, one for each party to act upon, and the third copy shall be deposited with the competent authorities to complete the registration procedures.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-14-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-14-khalid" data-article="14" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-14-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-14-nusrat" data-article="14" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-14-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-14-fawzi" data-article="14" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <h3 class="section-title">بنود إضافية / Additional Clauses</h3>
+
+        <!-- Article 15 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الخامس عشر: التعاريف</h4>
+                <p>لأغراض هذا العقد، يكون للكلمات والعبارات التالية المعاني المبينة قرين كل منها ما لم يقتضِ السياق خلاف ذلك...</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 15: Definitions</h4>
+                <p>For the purposes of this contract, the following words and phrases shall have the meanings assigned to them, unless the context otherwise requires...</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-15-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-15-khalid" data-article="15" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-15-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-15-nusrat" data-article="15" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-15-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-15-fawzi" data-article="15" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 16 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند السادس عشر: الاجتماعات الإلكترونية والتوقيع الرقمي</h4>
+                <p>يجوز لمجلس المديرين وجمعية الشركاء الانعقاد باستخدام وسائل التقنية الحديثة وتُعَدُّ قراراتهم صحيحة. كما تُعتمد التواقيع الإلكترونية أو الرقمية المعتمَدة نظامًا.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 16: Electronic Meetings and Digital Signatures</h4>
+                <p>Board and Partners’ meetings may be held via modern communication means. Electronic or digital signatures shall be valid for minutes, resolutions, and contracts.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-16-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-16-khalid" data-article="16" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-16-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-16-nusrat" data-article="16" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-16-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-16-fawzi" data-article="16" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 17 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند السابع عشر: تضارب المصالح ومعاملات الأطراف ذوي العلاقة</h4>
+                <p>يلتزم كل مدير أو شريك بالإفصاح عن أي مصلحة مباشرة أو غير مباشرة في معاملة مقترَحة للشركة. لا تسري أي معاملة مع طرف ذي علاقة إلا بعد موافقة جمعية الشركاء.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 17: Conflict of Interest & Related-Party Transactions</h4>
+                <p>Each Manager or Partner shall disclose any direct or indirect interest in a proposed transaction. A related-party transaction shall only be valid upon approval of the Partners’ Meeting, provided the terms are fair.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-17-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-17-khalid" data-article="17" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-17-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-17-nusrat" data-article="17" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-17-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-17-fawzi" data-article="17" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 18 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثامن عشر: تأمين المسؤولية المهنية للمديرين</h4>
+                <p>يجوز لمجلس المديرين –بعد موافقة جمعية الشركاء– إبرام عقود تأمين لحماية المديرين من المسؤوليات المدنية الناشئة عن أعمالهم.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 18: Directors’ & Officers’ Liability Insurance</h4>
+                <p>Subject to Partners’ approval, the Company may enter into insurance agreements covering civil liabilities of Directors arising from their managerial acts.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-18-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-18-khalid" data-article="18" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-18-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-18-nusrat" data-article="18" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-18-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-18-fawzi" data-article="18" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 19 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند التاسع عشر: آلية حلّ المأزق (Deadlock Resolution)</h4>
+                <p>إذا وقعت حالة مأزق، تتبع الإجراءات الآتية بالتدرج: وساطة، ثم آلية الشراء/البيع الإجباري.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 19: Deadlock Resolution</h4>
+                <p>If a Deadlock occurs, the parties shall first attempt mediation. If unresolved, a Buy-Sell Mechanism (“Russian Roulette”) may be triggered.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-19-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-19-khalid" data-article="19" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-19-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-19-nusrat" data-article="19" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-19-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-19-fawzi" data-article="19" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 20 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند العشرون: زيادة رأس المال والتمويل الإضافي ومعالجة التخفيف</h4>
+                <p>يجوز للشركة زيادة رأس مالها بدعوة الشركاء للاكتتاب. إذا تخلف أي شريك، تُخفَّض حصته.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 20: Capital Increase, Additional Funding & Dilution</h4>
+                <p>The Company may increase its capital by inviting existing Partners to subscribe pro-rata. Defaulting partners' ownership shall be diluted.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-20-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-20-khalid" data-article="20" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-20-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-20-nusrat" data-article="20" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-20-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-20-fawzi" data-article="20" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 21 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الحادي والعشرون: أدوات الدين والصكوك</h4>
+                <p>يجوز للشركة، بعد موافقة جميع الشركاء، إصدار أدوات دين أو صكوك تمويلية قابلة للتداول.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 21: Debt Instruments & Sukuk</h4>
+                <p>With unanimous consent, the Company may issue negotiable debt instruments or sukuk in accordance with applicable laws.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-21-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-21-khalid" data-article="21" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-21-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-21-nusrat" data-article="21" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-21-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-21-fawzi" data-article="21" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 22 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثاني والعشرون: حقوق السحب والإلزام (Tag-along / Drag-along)</h4>
+                <p>يتم تحديد حقوق السحب (Tag-along) للأقلية وحقوق الإلزام (Drag-along) للأغلبية وفق شروط محددة.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 22: Tag-along and Drag-along Rights</h4>
+                <p>Provisions for Tag-along rights for minority partners and Drag-along rights for majority partners are established under specific conditions.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-22-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-22-khalid" data-article="22" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-22-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-22-nusrat" data-article="22" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-22-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-22-fawzi" data-article="22" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 23 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثالث والعشرون: مكافحة الرشوة والامتثال ومكافحة غسل الأموال</h4>
+                <p>تلتزم الشركة وجميع الشركاء والمديرين بالتقيد التام بأحكام نظام مكافحة الرشوة وغسل الأموال.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 23: Anti-Bribery, Compliance & AML</h4>
+                <p>The Company and its affiliates shall fully comply with Saudi Anti-Bribery Law, Anti-Money Laundering Law and related regulations.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-23-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-23-khalid" data-article="23" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-23-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-23-nusrat" data-article="23" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-23-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-23-fawzi" data-article="23" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 30 (Skipping to 30 as in original) -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثلاثون: شرط التحكيم</h4>
+                <p>كل نزاع أو خلاف أو مطالبة ينشأ عن هذا العقد يُحال للتحكيم النهائي والملزم لدى المركز السعودي للتحكيم التجاري (SCCA) في الرياض.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 30: Arbitration</h4>
+                <p>Any dispute shall be finally resolved by arbitration under the Saudi Arbitration Law at the Saudi Center for Commercial Arbitration (SCCA) in Riyadh.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-30-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-30-khalid" data-article="30" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-30-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-30-nusrat" data-article="30" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-30-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-30-fawzi" data-article="30" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 31 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الحادي والثلاثون: اللغة الحاكمة</h4>
+                <p>حُرِّر هذا العقد باللغة العربية، وفي حال التعارض، تكون النسخة العربية هي الحاكمة والملزمة.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 31: Governing Language</h4>
+                <p>This Agreement is executed in Arabic; an English translation is for reference only. In case of conflict, the Arabic version shall prevail.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-31-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-31-khalid" data-article="31" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-31-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-31-nusrat" data-article="31" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-31-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-31-fawzi" data-article="31" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+        <!-- Article 33 -->
+        <div class="bilingual-section">
+            <div class="arabic-col">
+                <h4 class="article-title">البند الثالث والثلاثون: الترخيص الاستثماري للأطراف الأجنبية</h4>
+                <p>يقرّ الشركاء بامتلاك الشريك الأجنبي الترخيص الاستثماري رقم (............) الصادر من وزارة الاستثمار السعودية، ويلتزمون بتحديثه.</p>
+            </div>
+            <div class="english-col">
+                <h4 class="article-title">Article 33: Foreign Investment Licence</h4>
+                <p>The Partners acknowledge that the foreign Partner holds Investment Licence No. (............) issued by MISA and undertake to maintain its validity.</p>
+            </div>
+            <div class="notes-section">
+                <h5>ملاحظات ومناقشات / Notes & Discussions</h5>
+                <div class="note-item"><label for="note-33-khalid">ملاحظات خالد:</label><textarea class="note-textarea" id="note-33-khalid" data-article="33" data-partner="khalid" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-33-nusrat">ملاحظات نصرت:</label><textarea class="note-textarea" id="note-33-nusrat" data-article="33" data-partner="nusrat" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+                <div class="note-item"><label for="note-33-fawzi">ملاحظات فوزي:</label><textarea class="note-textarea" id="note-33-fawzi" data-article="33" data-partner="fawzi" placeholder="أضف ملاحظاتك هنا..."></textarea></div>
+            </div>
+        </div>
+
+
+        <div class="signatures-section">
+            <h3 class="section-title">التوقيعات / Signatures</h3>
+            <div class="signatures-grid">
+                <div class="signature-block">
+                    <p><strong>الطرف الأول / First Party</strong></p>
+                    <p>خالد حمود الذياب</p>
+                    <p>Khalid Hamoud Al-Theyab</p>
+                    <p class="signature-line"></p>
+                    <p>التوقيع / Signature</p>
+                </div>
+                <div class="signature-block">
+                    <p><strong>الطرف الثاني / Second Party</strong></p>
+                    <p>نصرت محمد ديلاور محمد</p>
+                    <p>Nusrat Mohammed Dilawar Mohammed</p>
+                    <p class="signature-line"></p>
+                    <p>التوقيع / Signature</p>
+                </div>
+                <div class="signature-block">
+                    <p><strong>الطرف الثالث / Third Party</strong></p>
+                    <p>فوزي حمود الذياب</p>
+                    <p>Fawzi Hamoud Al-Theyab</p>
+                    <p class="signature-line"></p>
+                    <p>التوقيع / Signature</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>تم تحرير هذا العقد من ثلاث نسخ أصلية، بيد كل طرف نسخة للعمل بموجبها.</p>
+            <p>This contract has been drawn up in three original copies, one for each party to act upon.</p>
+        </footer>
+
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- CONFIGURATION ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : { apiKey: "DEMO_KEY", authDomain: "DEMO.firebaseapp.com", projectId: "DEMO_PROJECT" };
+        
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const contractId = 'main_contract'; // A unique ID for this document's notes
+
+        // --- INITIALIZATION ---
+        let db, auth;
+        let docRef;
+        let savingTimeout;
+        const statusIndicator = document.getElementById('status-indicator');
+
+        // --- MAIN FUNCTION ---
+        async function main() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                // Set up the authentication state listener
+                onAuthStateChanged(auth, user => {
+                    if (user) {
+                        console.log("User is authenticated with UID:", user.uid);
+                        initializeNotes(); // Initialize notes once authenticated
+                    } else {
+                        console.log("User is not authenticated.");
+                    }
+                });
+
+                // Now, attempt to sign in
+                await authenticateUser();
+
+            } catch (e) {
+                console.error("Firebase initialization failed:", e);
+                updateStatus('Connection Failed', false);
+            }
+        }
+
+        // --- AUTHENTICATION ---
+        async function authenticateUser() {
+            try {
+                // Check for the custom token provided by the environment
+                const customToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                
+                if (customToken) {
+                    console.log("Attempting to sign in with custom token...");
+                    await signInWithCustomToken(auth, customToken);
+                    console.log("Successfully signed in with custom token.");
+                } else {
+                    console.log("No custom token found. Signing in anonymously...");
+                    await signInAnonymously(auth);
+                    console.log("Successfully signed in anonymously.");
+                }
+            } catch (error) {
+                console.error("Authentication failed:", error);
+                updateStatus('Authentication Failed', false);
+            }
+        }
+        
+        // --- FIRESTORE & NOTES LOGIC ---
+        function initializeNotes() {
+            // Path to the document in Firestore
+            docRef = doc(db, `artifacts/${appId}/public/data/contract_discussions/${contractId}`);
+
+            // Listen for real-time updates
+            onSnapshot(docRef, (doc) => {
+                console.log("Received real-time update from Firestore.");
+                const data = doc.data();
+                if (data) {
+                    document.querySelectorAll('.note-textarea').forEach(textarea => {
+                        const article = textarea.dataset.article;
+                        const partner = textarea.dataset.partner;
+                        const fieldName = `note_${article}_${partner}`;
+                        // Only update if the value is different to avoid cursor jumping
+                        if (data[fieldName] !== undefined && textarea.value !== data[fieldName]) {
+                           textarea.value = data[fieldName];
+                        }
+                    });
+                }
+                updateStatus('Connected & Synced', true);
+            }, (error) => {
+                console.error("Firestore snapshot error:", error);
+                updateStatus('Sync Error', false);
+            });
+
+            // Add event listeners to all textareas to save data on input
+            document.querySelectorAll('.note-textarea').forEach(textarea => {
+                textarea.addEventListener('input', (e) => {
+                    const article = e.target.dataset.article;
+                    const partner = e.target.dataset.partner;
+                    const text = e.target.value;
+                    saveNote(article, partner, text);
+                });
+            });
+        }
+
+        // Function to save a note to Firestore with debouncing
+        function saveNote(article, partner, text) {
+            if (!docRef) return;
+            
+            updateStatus('Saving...', false);
+            
+            clearTimeout(savingTimeout);
+            savingTimeout = setTimeout(async () => {
+                const fieldName = `note_${article}_${partner}`;
+                try {
+                    await setDoc(docRef, { [fieldName]: text }, { merge: true });
+                    console.log(`Saved note for article ${article}, partner ${partner}`);
+                    updateStatus('Connected & Synced', true);
+                } catch (error) {
+                    console.error("Error saving note: ", error);
+                    updateStatus('Save Failed', false);
+                }
+            }, 500); // Wait 500ms after user stops typing
+        }
+        
+        // Function to update the status indicator
+        function updateStatus(message, isConnected) {
+            if (!statusIndicator) return;
+            statusIndicator.textContent = message;
+            if(isConnected) {
+                statusIndicator.className = 'status-connected';
+            } else if (message.includes('Saving')) {
+                statusIndicator.className = 'status-saving';
+            } else {
+                 statusIndicator.className = 'status-error';
+            }
+        }
+        
+        // Run the main function when the DOM is ready
+        document.addEventListener('DOMContentLoaded', main);
+
+    </script>
+</body>
+</html>
