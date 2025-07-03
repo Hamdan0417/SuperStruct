@@ -1041,152 +1041,129 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- CONFIGURATION ---
-            const firebaseConfig = {
-        apiKey: "AIzaSyBI3AcsA9YpeplVDQWUh_-U7ZBrKODynpc",
-        authDomain: "studio-re5rd.firebaseapp.com",
-        projectId: "studio-re5rd",
-        storageBucket: "studio-re5rd.firebasestorage.app",
-        messagingSenderId: "823358049049",
-        appId: "1:823358049049:web:6ba8d8778f34fc94a41388"
-    };
-        
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const contractId = 'main_contract'; // A unique ID for this document's notes
+// --- CONFIGURATION ---
+const firebaseConfig = {
+  apiKey: "AIzaSyBI3AcsA9YpeplVDQWUh_-U7ZBrKODynpc",
+  authDomain: "studio-re5rd.firebaseapp.com",
+  projectId: "studio-re5rd",
+  storageBucket: "studio-re5rd.appspot.com", // Corrected from firebasestorage.app
+  messagingSenderId: "823358049049",
+  appId: "1:823358049049:web:6ba8d8778f34fc94a41388"
+};
 
-        // --- INITIALIZATION ---
-        let db, auth;
-        let docRef;
-        let savingTimeout;
-        const statusIndicator = document.getElementById('status-indicator');
+const appId = firebaseConfig.projectId; // Use your actual project ID
+const contractId = 'main_contract';
 
-        // --- MAIN FUNCTION ---
-        async function main() {
-            try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                
-                // Set up the authentication state listener
-                onAuthStateChanged(auth, user => {
-                    if (user) {
-                        console.log("User is authenticated with UID:", user.uid);
-                        initializeNotes(); // Initialize notes once authenticated
-                    } else {
-                        console.log("User is not authenticated.");
-                    }
-                });
+// --- INITIALIZATION ---
+let db, auth;
+let docRef;
+let savingTimeout;
+const statusIndicator = document.getElementById('status-indicator');
 
-                // Now, attempt to sign in
-                await authenticateUser();
+// --- MAIN FUNCTION ---
+async function main() {
+    try {
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        auth = getAuth(app);
 
-            } catch (e) {
-                console.error("Firebase initialization failed:", e);
-                updateStatus('Connection Failed', false);
-            }
-        }
-
-        // --- AUTHENTICATION ---
-        async function authenticateUser() {
-            try {
-                // Check for the custom token provided by the environment
-                const customToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-                
-                if (customToken) {
-                    console.log("Attempting to sign in with custom token...");
-                    await signInWithCustomToken(auth, customToken);
-                    console.log("Successfully signed in with custom token.");
-                } else {
-                    console.log("No custom token found. Signing in anonymously...");
-                    await signInAnonymously(auth);
-                    console.log("Successfully signed in anonymously.");
-                }
-            } catch (error) {
-                console.error("Authentication failed:", error);
-                // Provide a more helpful error message for the user.
-                // This error often happens when Anonymous Sign-In is not enabled in the Firebase project settings.
-                let userMessage = 'Authentication Failed';
-                if (error.code === 'auth/operation-not-allowed') {
-                    userMessage = 'خطأ: الرجاء تفعيل تسجيل الدخول المجهول في إعدادات Firebase.';
-                    console.error("GUIDE: Please go to your Firebase Console -> Authentication -> Sign-in method -> and enable the 'Anonymous' provider.");
-                }
-                updateStatus(userMessage, false);
-            }
-        }
-        
-        // --- FIRESTORE & NOTES LOGIC ---
-        function initializeNotes() {
-            // Path to the document in Firestore
-            docRef = doc(db, `artifacts/${appId}/public/data/contract_discussions/${contractId}`);
-
-            // Listen for real-time updates
-            onSnapshot(docRef, (doc) => {
-                console.log("Received real-time update from Firestore.");
-                const data = doc.data();
-                if (data) {
-                    document.querySelectorAll('.note-textarea').forEach(textarea => {
-                        const article = textarea.dataset.article;
-                        const partner = textarea.dataset.partner;
-                        const fieldName = `note_${article}_${partner}`;
-                        // Only update if the value is different to avoid cursor jumping
-                        if (data[fieldName] !== undefined && textarea.value !== data[fieldName]) {
-                           textarea.value = data[fieldName];
-                        }
-                    });
-                }
-                updateStatus('Connected & Synced', true);
-            }, (error) => {
-                console.error("Firestore snapshot error:", error);
-                updateStatus('Sync Error', false);
-            });
-
-            // Add event listeners to all textareas to save data on input
-            document.querySelectorAll('.note-textarea').forEach(textarea => {
-                textarea.addEventListener('input', (e) => {
-                    const article = e.target.dataset.article;
-                    const partner = e.target.dataset.partner;
-                    const text = e.target.value;
-                    saveNote(article, partner, text);
-                });
-            });
-        }
-
-        // Function to save a note to Firestore with debouncing
-        function saveNote(article, partner, text) {
-            if (!docRef) return;
-            
-            updateStatus('Saving...', false);
-            
-            clearTimeout(savingTimeout);
-            savingTimeout = setTimeout(async () => {
-                const fieldName = `note_${article}_${partner}`;
-                try {
-                    await setDoc(docRef, { [fieldName]: text }, { merge: true });
-                    console.log(`Saved note for article ${article}, partner ${partner}`);
-                    updateStatus('Connected & Synced', true);
-                } catch (error) {
-                    console.error("Error saving note: ", error);
-                    updateStatus('Save Failed', false);
-                }
-            }, 500); // Wait 500ms after user stops typing
-        }
-        
-        // Function to update the status indicator
-        function updateStatus(message, isConnected) {
-            if (!statusIndicator) return;
-            statusIndicator.textContent = message;
-            if(isConnected) {
-                statusIndicator.className = 'status-connected';
-            } else if (message.includes('Saving')) {
-                statusIndicator.className = 'status-saving';
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                console.log("User is authenticated with UID:", user.uid);
+                initializeNotes();
             } else {
-                 statusIndicator.className = 'status-error';
+                console.log("User is not authenticated.");
             }
-        }
-        
-        // Run the main function when the DOM is ready
-        document.addEventListener('DOMContentLoaded', main);
+        });
 
+        await authenticateUser();
+
+    } catch (e) {
+        console.error("Firebase initialization failed:", e);
+        updateStatus('Connection Failed', false);
+    }
+}
+
+// --- AUTHENTICATION ---
+async function authenticateUser() {
+    try {
+        await signInAnonymously(auth);
+        console.log("Successfully signed in anonymously.");
+    } catch (error) {
+        console.error("Authentication failed:", error);
+        let userMessage = 'Authentication Failed';
+        if (error.code === 'auth/operation-not-allowed') {
+            userMessage = 'خطأ: الرجاء تفعيل تسجيل الدخول المجهول في إعدادات Firebase.';
+        }
+        updateStatus(userMessage, false);
+    }
+}
+
+// --- FIRESTORE & NOTES LOGIC ---
+function initializeNotes() {
+    docRef = doc(db, `artifacts/${appId}/public/data/contract_discussions/${contractId}`);
+
+    onSnapshot(docRef, (doc) => {
+        console.log("Received real-time update from Firestore.");
+        const data = doc.data();
+        if (data) {
+            document.querySelectorAll('.note-textarea').forEach(textarea => {
+                const article = textarea.dataset.article;
+                const partner = textarea.dataset.partner;
+                const fieldName = `note_${article}_${partner}`;
+                if (data[fieldName] !== undefined && textarea.value !== data[fieldName]) {
+                   textarea.value = data[fieldName];
+                }
+            });
+        }
+        updateStatus('Connected & Synced', true);
+    }, (error) => {
+        console.error("Firestore snapshot error:", error);
+        updateStatus('Sync Error', false);
+    });
+
+    document.querySelectorAll('.note-textarea').forEach(textarea => {
+        textarea.addEventListener('input', (e) => {
+            const article = e.target.dataset.article;
+            const partner = e.target.dataset.partner;
+            const text = e.target.value;
+            saveNote(article, partner, text);
+        });
+    });
+}
+
+function saveNote(article, partner, text) {
+    if (!docRef) return;
+
+    updateStatus('Saving...', false);
+
+    clearTimeout(savingTimeout);
+    savingTimeout = setTimeout(async () => {
+        const fieldName = `note_${article}_${partner}`;
+        try {
+            await setDoc(docRef, { [fieldName]: text }, { merge: true });
+            console.log(`Saved note for article ${article}, partner ${partner}`);
+            updateStatus('Connected & Synced', true);
+        } catch (error) {
+            console.error("Error saving note: ", error);
+            updateStatus('Save Failed', false);
+        }
+    }, 500);
+}
+
+function updateStatus(message, isConnected) {
+    if (!statusIndicator) return;
+    statusIndicator.textContent = message;
+    if(isConnected) {
+        statusIndicator.className = 'status-connected';
+    } else if (message.includes('Saving')) {
+        statusIndicator.className = 'status-saving';
+    } else {
+         statusIndicator.className = 'status-error';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', main);
     </script>
 </body>
 </html>
