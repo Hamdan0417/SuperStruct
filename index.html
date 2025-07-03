@@ -1042,19 +1042,13 @@
         import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- CONFIGURATION ---
-                const firebaseConfig = {
-            apiKey: "AIzaSyBI3AcsA9YpeplVDQWUh_-U7ZBrKODynpc",
-            authDomain: "studio-re5rd.firebaseapp.com",
-            projectId: "studio-re5rd",
-            storageBucket: "studio-re5rd.firebasestorage.app",
-            messagingSenderId: "823358049049",
-            appId: "1:823358049049:web:6ba8d8778f34fc94a41388"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        </script>
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : { apiKey: "DEMO_KEY", authDomain: "DEMO.firebaseapp.com", projectId: "DEMO_PROJECT" };
         
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const contractId = 'main_contract'; // A unique ID for this document's notes
+
         // --- INITIALIZATION ---
         let db, auth;
         let docRef;
